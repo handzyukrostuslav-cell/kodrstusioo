@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Керування сайтом — Kodr.studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- ЕКРАН АВТОРИЗАЦІЇ -->
+  <div id="login-screen" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-brand">
+        <span class="logo-dot"></span>Kodr<span>.studio</span>
+      </div>
+      <h1>Вхід у панель керування</h1>
+      <p class="login-sub">Закритий кабінет власника для редагування контенту, портфоліо, цін та оформлення сайту.</p>
+
+      <form id="login-form">
+        <div class="field">
+          <label for="login-username">Логін</label>
+          <input type="text" id="login-username" placeholder="Введіть логін" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="login-password">Пароль</label>
+          <div class="pass-wrap">
+            <input type="password" id="login-password" placeholder="Введіть пароль" autocomplete="current-password" required>
+            <button type="button" id="toggle-pass-btn" class="icon-btn" title="Показати/сховати пароль">👁</button>
+          </div>
+        </div>
+        <div id="login-error" class="error-msg hidden">Невірний логін або пароль</div>
+        <button type="submit" class="btn btn-primary btn-full">Увійти в кабінет</button>
+      </form>
+
+      <div class="login-hint">
+        Базовий доступ: логін <code>admin</code>, пароль <code>123456</code> (змініть у вкладці «Публікація та безпека» одразу після входу).
+      </div>
+    </div>
+  </div>
+
+  <!-- ОСНОВНИЙ ІНТЕРФЕЙС АДМІН-ПАНЕЛІ -->
+  <div id="admin-app" class="admin-app hidden">
+    <!-- Верхня панель дій -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="admin-logo">
+          <span class="logo-dot"></span>Kodr<span>.studio</span>
+          <span class="badge-pill">Admin</span>
+        </div>
+        <span id="unsaved-indicator" class="status-badge saved">Усі зміни синхронізовано</span>
+      </div>
+
+      <div class="topbar-actions">
+        <button type="button" id="btn-preview" class="btn btn-outline btn-sm">
+          👁 Переглянути на сайті
+        </button>
+        <button type="button" id="btn-publish-github" class="btn btn-primary btn-sm">
+          🚀 Зберегти та опублікувати
+        </button>
+        <button type="button" id="btn-logout" class="btn btn-ghost btn-sm" title="Вийти з акаунту">
+          Вийти
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-layout">
+      <!-- Бокове меню розділів -->
+      <aside class="sidebar">
+        <nav class="side-nav" id="admin-tabs">
+          <button type="button" class="tab-btn active" data-tab="tab-portfolio">
+            <span>💼</span> Портфоліо
+          </button>
+          <button type="button" class="tab-btn" data-tab="tab-hero">
+            <span>✨</span> Головний екран
+          </button>
+          <button type="button" class="tab-btn" data-tab="tab-services">
+            <span>🧮</span> Послуги і ціни
+          </button>
+          <button type="button" class="tab-btn" data-tab="tab-contacts">
+            <span>📱</span> Контакти і соцмережі
+          </button>
+          <button type="button" class="tab-btn" data-tab="tab-appearance">
+            <span>🎨</span> Оформлення і меню
+          </button>
+          <button type="button" class="tab-btn" data-tab="tab-content">
+            <span>📋</span> Етапи, FAQ та SEO
+          </button>
+          <button type="button" class="tab-btn" data-tab="tab-settings">
+            <span>⚙️</span> Публікація і безпека
+          </button>
+        </nav>
+      </aside>
+
+      <!-- Робоча область -->
+      <main class="workspace">
+
+        <!-- ВКЛАДКА 1: ПОРТФОЛІО -->
+        <section id="tab-portfolio" class="tab-panel active">
+          <div class="panel-header">
+            <div>
+              <h2>Керування портфоліо</h2>
+              <p>Додавайте нові роботи, редагуйте описи, змінюйте кольори карток або додавайте скриншоти.</p>
+            </div>
+            <button type="button" id="btn-add-project" class="btn btn-primary">+ Додати проєкт</button>
+          </div>
+
+          <div class="card-box">
+            <h3>Заголовок розділу та фільтри категорій</h3>
+            <div class="grid-2">
+              <div class="field">
+                <label>Надзаголовок (Eyebrow)</label>
+                <input type="text" data-bind="portfolio.eyebrow">
+              </div>
+              <div class="field">
+                <label>Головний заголовок секції</label>
+                <input type="text" data-bind="portfolio.title">
+              </div>
+            </div>
+
+            <div class="sub-block">
+              <div class="sub-header">
+                <label>Кнопки фільтрації портфоліо</label>
+                <button type="button" id="btn-add-filter" class="btn btn-outline btn-xs">+ Додати категорію</button>
+              </div>
+              <div id="portfolio-filters-list" class="repeater-list"></div>
+            </div>
+          </div>
+
+          <div id="portfolio-projects-list" class="projects-admin-list"></div>
+        </section>
+
+        <!-- ВКЛАДКА 2: ГОЛОВНИЙ ЕКРАН (HERO) -->
+        <section id="tab-hero" class="tab-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Головний екран та статус зайнятості</h2>
+              <p>Керуйте першим екраном сайту, індикатором вільних місць та блоком ключових переваг.</p>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <h3>Статус зайнятості у верхній частині</h3>
+            <div class="grid-3">
+              <div class="field">
+                <label class="checkbox-label">
+                  <input type="checkbox" data-bind="hero.statusVisible">
+                  <span>Показувати плашку статусу</span>
+                </label>
+              </div>
+              <div class="field">
+                <label>Колір індикатора</label>
+                <select data-bind="hero.statusColor">
+                  <option value="green">🟢 Зелений (Відкритий до проєктів)</option>
+                  <option value="yellow">🟡 Жовтий (Обмежена кількість місць)</option>
+                  <option value="red">🔴 Червоний (Запис на наступний тиждень)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Текст статусу</label>
+                <input type="text" data-bind="hero.statusText">
+              </div>
+            </div>
+            <div class="field">
+              <label>Підказка праворуч про зміну теми</label>
+              <input type="text" data-bind="hero.styleHint">
+            </div>
+          </div>
+
+          <div class="card-box">
+            <h3>Заголовки та кнопки головного екрана</h3>
+            <div class="grid-3">
+              <div class="field">
+                <label>Початок заголовка</label>
+                <input type="text" data-bind="hero.titleBefore">
+              </div>
+              <div class="field">
+                <label>Виділена частина (акцентним кольором)</label>
+                <input type="text" data-bind="hero.titleAccent">
+              </div>
+              <div class="field">
+                <label>Закінчення заголовка</label>
+                <input type="text" data-bind="hero.titleAfter">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Підзаголовок (опис під заголовком)</label>
+              <textarea rows="3" data-bind="hero.subtitle"></textarea>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label>Текст основної кнопки</label>
+                <input type="text" data-bind="hero.primaryBtnText">
+              </div>
+              <div class="field">
+                <label>Посилання основної кнопки</label>
+                <input type="text" data-bind="hero.primaryBtnLink">
+              </div>
+              <div class="field">
+                <label>Текст другої кнопки</label>
+                <input type="text" data-bind="hero.secondaryBtnText">
+              </div>
+              <div class="field">
+                <label>Посилання другої кнопки</label>
+                <input type="text" data-bind="hero.secondaryBtnLink">
+              </div>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <div class="sub-header">
+              <h3>4 картки переваг (метрики під кнопками)</h3>
+              <button type="button" id="btn-add-metric" class="btn btn-outline btn-xs">+ Додати метрику</button>
+            </div>
+            <div id="hero-metrics-list" class="repeater-list"></div>
+          </div>
+        </section>
+
+        <!-- ВКЛАДКА 3: ПОСЛУГИ ТА КАЛЬКУЛЯТОР -->
+        <section id="tab-services" class="tab-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Послуги та калькулятор вартості</h2>
+              <p>Редагуйте опис ваших послуг, прайс у калькуляторі та умови пакетної знижки.</p>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <div class="sub-header">
+              <h3>Блок «Послуги»</h3>
+              <button type="button" id="btn-add-service" class="btn btn-outline btn-xs">+ Додати картку послуги</button>
+            </div>
+            <div class="grid-3">
+              <div class="field">
+                <label>Надзаголовок</label>
+                <input type="text" data-bind="services.eyebrow">
+              </div>
+              <div class="field">
+                <label>Заголовок секції</label>
+                <input type="text" data-bind="services.title">
+              </div>
+              <div class="field">
+                <label>Підзаголовок</label>
+                <input type="text" data-bind="services.subtitle">
+              </div>
+            </div>
+            <div id="services-items-list" class="repeater-list"></div>
+          </div>
+
+          <div class="card-box">
+            <h3>Широкий банер комплексної пропозиції</h3>
+            <div class="field">
+              <label class="checkbox-label">
+                <input type="checkbox" data-bind="services.bundle.visible">
+                <span>Показувати банер зі знижкою під картками послуг</span>
+              </label>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>Надзаголовок банера</label>
+                <input type="text" data-bind="services.bundle.eyebrow">
+              </div>
+              <div class="field">
+                <label>Заголовок банера</label>
+                <input type="text" data-bind="services.bundle.title">
+              </div>
+            </div>
+            <div class="field">
+              <label>Опис банера</label>
+              <textarea rows="2" data-bind="services.bundle.description"></textarea>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>Текст кнопки</label>
+                <input type="text" data-bind="services.bundle.btnText">
+              </div>
+              <div class="field">
+                <label>Посилання кнопки</label>
+                <input type="text" data-bind="services.bundle.btnLink">
+              </div>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <div class="sub-header">
+              <h3>Калькулятор послуг та знижки</h3>
+              <button type="button" id="btn-add-calc" class="btn btn-primary btn-xs">+ Додати позицію в калькулятор</button>
+            </div>
+            <div class="grid-3">
+              <div class="field">
+                <label>Заголовок калькулятора</label>
+                <input type="text" data-bind="calculator.title">
+              </div>
+              <div class="field">
+                <label>Валюта</label>
+                <input type="text" data-bind="calculator.currency">
+              </div>
+              <div class="field">
+                <label>Текст кнопки перенесення в заявку</label>
+                <input type="text" data-bind="calculator.applyBtnText">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>Мінімум обраних послуг для знижки</label>
+                <input type="number" min="1" max="20" data-bind="calculator.discountMinCount">
+              </div>
+              <div class="field">
+                <label>Розмір знижки (%)</label>
+                <input type="number" min="0" max="90" data-bind="calculator.discountPercent">
+              </div>
+            </div>
+            <div id="calc-items-list" class="repeater-list"></div>
+          </div>
+        </section>
+
+        <!-- ВКЛАДКА 4: КОНТАКТИ І СОЦМЕРЕЖІ -->
+        <section id="tab-contacts" class="tab-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Контакти, телефон, соцмережі та форма заявки</h2>
+              <p>Змінюйте номер телефону, посилання на Telegram, Viber, Instagram та налаштовуйте форму замовлення.</p>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <h3>Основні налаштування зв’язку</h3>
+            <div class="grid-2">
+              <div class="field">
+                <label>Головне посилання Telegram (куди перекидає після заявки)</label>
+                <input type="text" data-bind="contacts.telegramUrl" placeholder="https://t.me/username">
+              </div>
+              <div class="field">
+                <label>Нік у Telegram (для підказок)</label>
+                <input type="text" data-bind="contacts.telegramHandle" placeholder="@username">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>Заголовок блоку контактів</label>
+                <input type="text" data-bind="contacts.title">
+              </div>
+              <div class="field">
+                <label>Текст спливаючого повідомлення (Toast)</label>
+                <input type="text" data-bind="contacts.toastMessage">
+              </div>
+            </div>
+            <div class="field">
+              <label>Опис під заголовком (підтримує тег &lt;strong&gt;)</label>
+              <textarea rows="2" data-bind="contacts.description"></textarea>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <div class="sub-header">
+              <h3>Картки контактів і соцмереж (Telegram, Viber, Телефон, Instagram тощо)</h3>
+              <button type="button" id="btn-add-contact" class="btn btn-primary btn-xs">+ Додати контакт / соцмережу</button>
+            </div>
+            <div id="contacts-cards-list" class="repeater-list"></div>
+          </div>
+
+          <div class="card-box">
+            <div class="sub-header">
+              <h3>Випадаючий список сфер діяльності у формі заявки</h3>
+              <button type="button" id="btn-add-niche" class="btn btn-outline btn-xs">+ Додати сферу</button>
+            </div>
+            <div id="niches-list" class="repeater-list"></div>
+
+            <div class="grid-2" style="margin-top: 18px;">
+              <div class="field">
+                <label>Текст головної кнопки форми</label>
+                <input type="text" data-bind="contacts.submitBtnText">
+              </div>
+              <div class="field">
+                <label>Текст другої кнопки форми</label>
+                <input type="text" data-bind="contacts.directBtnText">
+              </div>
+            </div>
+            <div class="field">
+              <label>Шаблон тексту заявки (змінні: {niche}, {services}, {contact}, {notes})</label>
+              <textarea rows="3" data-bind="contacts.briefTemplate"></textarea>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <div class="sub-header">
+              <h3>Підвал сайту (Footer)</h3>
+              <button type="button" id="btn-add-footer-link" class="btn btn-outline btn-xs">+ Додати посилання у футер</button>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>Копірайт</label>
+                <input type="text" data-bind="footer.copyright">
+              </div>
+              <div class="field">
+                <label>Кнопка «Наверх»</label>
+                <input type="text" data-bind="footer.backTopText">
+              </div>
+            </div>
+            <div id="footer-links-list" class="repeater-list"></div>
+          </div>
+        </section>
+
+        <!-- ВКЛАДКА 5: ОФОРМЛЕННЯ І МЕНЮ -->
+        <section id="tab-appearance" class="tab-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Оформлення, кольори та логотип</h2>
+              <p>Обирайте базову тему сайту, налаштовуйте власну кольорову палітру або редагуйте логотип і пункти меню.</p>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <h3>Тема оформлення сайту</h3>
+            <div class="grid-2">
+              <div class="field">
+                <label>Тема за замовчуванням для нових відвідувачів</label>
+                <select data-bind="appearance.defaultTheme">
+                  <option value="dark">🌑 Темна (Dark — фірмова)</option>
+                  <option value="cappuccino">☕ Капучино (Cappuccino)</option>
+                  <option value="light">☀️ Світла (Light)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="checkbox-label" style="margin-top: 28px;">
+                  <input type="checkbox" data-bind="appearance.allowVisitorThemeSwitch">
+                  <span>Дозволити відвідувачам перемикати теми у шапці</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sub-block">
+              <label class="checkbox-label">
+                <input type="checkbox" id="custom-colors-toggle" data-bind="appearance.customColorsEnabled">
+                <span><strong>Увімкнути власну кольорову палітру</strong> (перекриває стандартні теми)</span>
+              </label>
+
+              <div id="custom-colors-grid" class="colors-grid">
+                <div class="color-field">
+                  <label>Основний фон</label>
+                  <input type="color" data-bind="appearance.customColors.bgMain">
+                </div>
+                <div class="color-field">
+                  <label>Альтернативний фон секцій</label>
+                  <input type="color" data-bind="appearance.customColors.bgAlt">
+                </div>
+                <div class="color-field">
+                  <label>Фон карток</label>
+                  <input type="color" data-bind="appearance.customColors.bgCard">
+                </div>
+                <div class="color-field">
+                  <label>Основний текст</label>
+                  <input type="color" data-bind="appearance.customColors.textMain">
+                </div>
+                <div class="color-field">
+                  <label>Другорядний текст</label>
+                  <input type="color" data-bind="appearance.customColors.textMuted">
+                </div>
+                <div class="color-field">
+                  <label>Акцентний колір (кнопки, цифри)</label>
+                  <input type="color" data-bind="appearance.customColors.accent">
+                </div>
+                <div class="color-field">
+                  <label>Текст на акцентних кнопках</label>
+                  <input type="color" data-bind="appearance.customColors.accentText">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <h3>Логотип та кнопка у шапці</h3>
+            <div class="grid-2">
+              <div class="field">
+                <label>Перша частина логотипа</label>
+                <input type="text" data-bind="header.logoMain">
+              </div>
+              <div class="field">
+                <label>Акцентна частина логотипа</label>
+                <input type="text" data-bind="header.logoAccent">
+              </div>
+              <div class="field">
+                <label>Текст кнопки у шапці</label>
+                <input type="text" data-bind="header.ctaText">
+              </div>
+              <div class="field">
+                <label>Посилання кнопки у шапці</label>
+                <input type="text" data-bind="header.ctaLink">
+              </div>
+            </div>
+
+            <div class="sub-block">
+              <div class="sub-header">
+                <label>Пункти навігаційного меню</label>
+                <button type="button" id="btn-add-nav" class="btn btn-outline btn-xs">+ Додати пункт меню</button>
+              </div>
+              <div id="header-nav-list" class="repeater-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ВКЛАДКА 6: ЕТАПИ, FAQ ТА SEO -->
+        <section id="tab-content" class="tab-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Етапи роботи, часті запитання та SEO</h2>
+              <p>Редагуйте кроки співпраці, блок відповідей на запитання та відображення сайту в пошуку й соцмережах.</p>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <div class="sub-header">
+              <h3>Етапи співпраці</h3>
+              <button type="button" id="btn-add-step" class="btn btn-outline btn-xs">+ Додати етап</button>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>Надзаголовок</label>
+                <input type="text" data-bind="process.eyebrow">
+              </div>
+              <div class="field">
+                <label>Заголовок секції</label>
+                <input type="text" data-bind="process.title">
+              </div>
+            </div>
+            <div id="process-steps-list" class="repeater-list"></div>
+          </div>
+
+          <div class="card-box">
+            <div class="sub-header">
+              <h3>Часті запитання (FAQ)</h3>
+              <button type="button" id="btn-add-faq" class="btn btn-outline btn-xs">+ Додати питання</button>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label>Надзаголовок</label>
+                <input type="text" data-bind="faq.eyebrow">
+              </div>
+              <div class="field">
+                <label>Заголовок секції</label>
+                <input type="text" data-bind="faq.title">
+              </div>
+            </div>
+            <div id="faq-items-list" class="repeater-list"></div>
+          </div>
+
+          <div class="card-box">
+            <h3>SEO та вигляд посилання при відправці</h3>
+            <div class="field">
+              <label>Заголовок вкладки браузера (Title)</label>
+              <input type="text" data-bind="seo.title">
+            </div>
+            <div class="field">
+              <label>Мета-опис сайту (Description)</label>
+              <textarea rows="2" data-bind="seo.description"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- ВКЛАДКА 7: ПУБЛІКАЦІЯ ТА БЕЗПЕКА -->
+        <section id="tab-settings" class="tab-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Автопублікація на GitHub та безпека акаунту</h2>
+              <p>Підключіть ваш репозиторій один раз, щоб кнопка «Зберегти та опублікувати» миттєво оновлювала живий сайт для всіх клієнтів.</p>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <h3>Підключення GitHub API (зберігається лише у вашому браузері)</h3>
+            <div class="grid-2">
+              <div class="field">
+                <label>Ваш логін на GitHub (Owner)</label>
+                <input type="text" id="gh-owner" placeholder="Наприклад: handzyukrostuslav-cell">
+              </div>
+              <div class="field">
+                <label>Назва репозиторію сайту (Repo)</label>
+                <input type="text" id="gh-repo" placeholder="Наприклад: kodr-studio">
+              </div>
+              <div class="field">
+                <label>Гілка (Branch)</label>
+                <input type="text" id="gh-branch" value="main" placeholder="main">
+              </div>
+              <div class="field">
+                <label>Шлях до файлу даних</label>
+                <input type="text" id="gh-path" value="site-data.json" placeholder="site-data.json">
+              </div>
+            </div>
+            <div class="field">
+              <label>GitHub Personal Access Token (зі списком прав: Contents → Read and write)</label>
+              <input type="password" id="gh-token" placeholder="github_pat_... або ghp_...">
+            </div>
+            <div class="btn-row">
+              <button type="button" id="btn-save-gh" class="btn btn-primary btn-sm">Зберегти налаштування GitHub</button>
+              <button type="button" id="btn-test-gh" class="btn btn-outline btn-sm">Перевірити підключення</button>
+            </div>
+          </div>
+
+          <div class="card-box">
+            <h3>Зміна логіна та пароля від адмін-панелі</h3>
+            <p class="muted-note">Після зміни пароля не забудьте натиснути «Зберегти та опублікувати», щоб новий пароль зберігся на сервері.</p>
+            <div class="grid-3">
+              <div class="field">
+                <label>Новий логін</label>
+                <input type="text" id="sec-new-login">
+              </div>
+              <div class="field">
+                <label>Новий пароль</label>
+                <input type="password" id="sec-new-pass" placeholder="Мінімум 4 символи">
+              </div>
+              <div class="field">
+                <label>Повторіть новий пароль</label>
+                <input type="password" id="sec-confirm-pass" placeholder="Повторіть пароль">
+              </div>
+            </div>
+            <button type="button" id="btn-update-auth" class="btn btn-outline btn-sm">Оновити логін і пароль</button>
+          </div>
+
+          <div class="card-box">
+            <h3>Резервне копіювання та ручне завантаження</h3>
+            <p class="muted-note">Ви можете завантажити готовий файл <code>site-data.json</code> на пристрій або відновити сайт із резервної копії.</p>
+            <div class="btn-row">
+              <button type="button" id="btn-download-json" class="btn btn-outline btn-sm">⬇ Завантажити site-data.json</button>
+              <label class="btn btn-outline btn-sm" style="margin: 0; cursor: pointer;">
+                ⬆ Завантажити з файлу (.json)
+                <input type="file" id="input-import-json" accept=".json" hidden>
+              </label>
+              <button type="button" id="btn-reset-draft" class="btn btn-danger-outline btn-sm">Скинути незбережену чернетку</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div id="admin-toast" class="toast"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

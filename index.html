@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="seo-title">Kodr.studio — Сайти для онлайн-запису та розробка логотипів</title>
+  <meta id="seo-description" name="description" content="Створюю сайти для онлайн-запису та розробляю фірмові логотипи. Запускаю сайт під ключ з особистим адмін-кабінетом і сповіщеннями в Telegram за 2–3 дні — без щомісячної плати за хостинг.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- НАВІГАЦІЯ -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#top" class="logo" id="site-logo">
+        <span class="logo-dot"></span><span id="logo-main">Kodr</span><span id="logo-accent">.studio</span>
+      </a>
+
+      <nav class="nav" id="main-nav">
+        <a href="#services">Послуги</a>
+        <a href="#portfolio">Приклади робіт</a>
+        <a href="#calculator">Калькулятор</a>
+        <a href="#process">Етапи роботи</a>
+        <a href="#faq">Питання</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Перемикач кольорової гами сайту -->
+        <div class="theme-switcher" id="theme-switcher" title="Змінити кольорову гаму сайту">
+          <button type="button" class="theme-btn active" data-theme-val="dark" aria-label="Темний стиль">●</button>
+          <button type="button" class="theme-btn" data-theme-val="cappuccino" aria-label="Стиль капучино">●</button>
+          <button type="button" class="theme-btn" data-theme-val="light" aria-label="Світлий стиль">●</button>
+        </div>
+
+        <a href="#order" class="btn btn-primary btn-sm" id="header-cta">Обговорити проєкт</a>
+        <button type="button" class="burger-btn" id="burger-btn" aria-label="Меню">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ГОЛОВНИЙ ЕКРАН -->
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-top-bar reveal">
+        <span class="status-pill" id="hero-status-pill">
+          <span class="pulse-dot" id="hero-status-dot"></span>
+          <span id="hero-status-text">Відкритий до нових проєктів на цей тиждень</span>
+        </span>
+        <span class="style-hint" id="hero-style-hint">Оберіть бажану кольорову гаму сайту у верхньому меню</span>
+      </div>
+
+      <h1 class="hero-title reveal" id="hero-title">
+        Створюю <span class="accent-text">сайти для онлайн-запису</span> та розробляю фірмові логотипи
+      </h1>
+
+      <p class="hero-subtitle reveal" id="hero-subtitle">
+        Допомагаю майстрам б’юті-сфери та локальним брендам гідно презентувати свої послуги й зручно приймати клієнтів. Запускаю сайт під ключ з особистим адмін-кабінетом і сповіщеннями в Telegram за 2–3 дні — без щомісячної плати за хостинг.
+      </p>
+
+      <div class="hero-cta-group reveal">
+        <a href="#calculator" class="btn btn-primary" id="hero-primary-btn">Розрахувати вартість</a>
+        <a href="#portfolio" class="btn btn-outline" id="hero-secondary-btn">Переглянути приклади робіт</a>
+      </div>
+
+      <!-- Ключові переваги -->
+      <div class="metrics-strip reveal" id="hero-metrics">
+        <div class="metric-item">
+          <strong>2–3 дні</strong>
+          <span>Термін запуску готового сайту</span>
+        </div>
+        <div class="metric-item">
+          <strong>0 грн / міс</strong>
+          <span>Без щомісячної абонплати за сайт</span>
+        </div>
+        <div class="metric-item">
+          <strong>Адмін-кабінет</strong>
+          <span>Зручне керування записами та графіком</span>
+        </div>
+        <div class="metric-item">
+          <strong>100%</strong>
+          <span>Бездоганний вигляд на будь-якому смартфоні</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОСЛУГИ -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" id="services-eyebrow">Послуги</span>
+        <h2 id="services-title">Чим я можу допомогти вашому бізнесу</h2>
+        <p id="services-subtitle">Ви можете замовити одну конкретну послугу або поєднати всі три для комплексного запуску</p>
+      </div>
+
+      <div class="bento-grid" id="services-grid">
+        <!-- Послуга 1 -->
+        <article class="bento-card spotlight-card reveal">
+          <div>
+            <div class="card-num">01</div>
+            <h3>Розробка логотипа та фірмової палітри</h3>
+            <p>Створюю витончений та впізнаваний логотип, який гармонійно виглядає на аватарці, візитці чи банері. Підбираю 2–3 фірмові кольори та шрифти, щоб ваш бренд мав цілісний і професійний вигляд.</p>
+          </div>
+          <ul class="card-tags">
+            <li>2 варіанти на вибір</li>
+            <li>Файли без фону (PNG)</li>
+            <li>Підбір кольорів бренду</li>
+          </ul>
+        </article>
+
+        <!-- Послуга 2 -->
+        <article class="bento-card spotlight-card reveal">
+          <div>
+            <div class="card-num">02</div>
+            <h3>Сайт для онлайн-запису під ключ з адмін-акаунтом</h3>
+            <p>Сучасний сайт для шапки профілю з прайсом, відгуками та вибором вільного часу. У комплекті налаштовую закритий адмін-кабінет, де ви самостійно переглядаєте заявки та керуєте вільними годинами в графіку.</p>
+          </div>
+          <ul class="card-tags">
+            <li>Особистий адмін-кабінет</li>
+            <li>Онлайн-вибір дати й часу</li>
+            <li>Без абонплати за хостинг</li>
+          </ul>
+        </article>
+
+        <!-- Послуга 3 -->
+        <article class="bento-card spotlight-card reveal">
+          <div>
+            <div class="card-num">03</div>
+            <h3>Підключення миттєвих сповіщень у Telegram</h3>
+            <p>Налаштовую пряму передачу заявок із сайту у ваш Telegram. Щойно клієнт оформлює запис, ви одразу отримуєте сповіщення з його ім’ям, контактами, обраною послугою та часом візиту.</p>
+          </div>
+          <ul class="card-tags">
+            <li>Миттєві сповіщення в чат</li>
+            <li>Не потрібно постійно перевіряти сайт</li>
+            <li>Зручний зв’язок із клієнтом</li>
+          </ul>
+        </article>
+
+        <!-- Пакетна пропозиція -->
+        <article class="bento-card bento-wide spotlight-card reveal">
+          <div class="bento-wide-content">
+            <span class="eyebrow">Комплексна пропозиція</span>
+            <h3>Знижка 15% при замовленні комплексу з 3 послуг</h3>
+            <p>Якщо вам потрібен логотип, сайт з адмін-кабінетом і підключення сповіщень у Telegram — оберіть їх у калькуляторі нижче, і знижка розрахується автоматично.</p>
+          </div>
+          <div class="bento-wide-action">
+            <a href="#calculator" class="btn btn-primary">Розрахувати вартість →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОРТФОЛІО -->
+  <section id="portfolio" class="section section-alt">
+    <div class="container">
+      <div class="section-head-row reveal">
+        <div>
+          <span class="eyebrow" id="portfolio-eyebrow">Портфоліо</span>
+          <h2 id="portfolio-title">Реалізовані проєкти</h2>
+        </div>
+        <div class="portfolio-filters" id="portfolio-filters">
+          <button type="button" class="filter-btn active" data-filter="all">Усі приклади</button>
+          <button type="button" class="filter-btn" data-filter="web">Готові сайти</button>
+          <button type="button" class="filter-btn" data-filter="brand">Логотипи та айдентика</button>
+        </div>
+      </div>
+
+      <div class="portfolio-grid" id="portfolio-grid">
+        <!-- Динамічно заповнюється з site-data.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- КАЛЬКУЛЯТОР ВАРТОСТІ -->
+  <section id="calculator" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" id="calc-eyebrow">Розрахунок вартості</span>
+        <h2 id="calc-title">Калькулятор послуг</h2>
+        <p id="calc-subtitle">Оберіть потрібні позиції — система автоматично розрахує підсумкову вартість та орієнтовний термін виконання</p>
+      </div>
+
+      <div class="calc-wrapper reveal">
+        <div class="calc-options" id="calc-options">
+          <!-- Динамічно заповнюється з site-data.json -->
+        </div>
+
+        <div class="calc-summary spotlight-card">
+          <div class="calc-summary-top">
+            <span class="eyebrow">Ваш розрахунок</span>
+            <span id="calc-discount-badge" class="discount-badge">Знижка 15% за замовлення від 3 послуг</span>
+          </div>
+
+          <ul id="calc-selected-list" class="calc-list"></ul>
+
+          <div class="calc-totals">
+            <div class="total-row">
+              <span>Орієнтовний термін запуску:</span>
+              <strong id="calc-total-days">3–4 дні</strong>
+            </div>
+            <div class="total-row total-price-row">
+              <span>Разом до сплати:</span>
+              <div>
+                <span id="calc-old-price" class="old-price">2 400 грн</span>
+                <strong id="calc-total-price">2 040 грн</strong>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" id="apply-calc-btn" class="btn btn-primary btn-full">
+            Перенести в заявку
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЕТАПИ РОБОТИ -->
+  <section id="process" class="section section-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" id="process-eyebrow">Порядок співпраці</span>
+        <h2 id="process-title">Як відбувається робота над вашим проєктом</h2>
+      </div>
+
+      <div class="steps-grid" id="steps-grid">
+        <!-- Динамічно заповнюється з site-data.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ЧАСТІ ЗАПИТАННЯ -->
+  <section id="faq" class="section">
+    <div class="container faq-container">
+      <div class="section-head reveal">
+        <span class="eyebrow" id="faq-eyebrow">Питання та відповіді</span>
+        <h2 id="faq-title">Відповіді на часті запитання</h2>
+      </div>
+
+      <div class="faq-list reveal" id="faq-list">
+        <!-- Динамічно заповнюється з site-data.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ФОРМА ЗАМОВЛЕННЯ ТА КОНТАКТИ -->
+  <section id="order" class="section section-alt">
+    <div class="container">
+      <div class="order-grid reveal">
+        <div class="order-info">
+          <span class="eyebrow" id="contacts-eyebrow">Контакти</span>
+          <h2 id="contacts-title">Залиште заявку або зв’яжіться зі мною напряму</h2>
+          <p id="contacts-description">Я на зв’язку щодня. <strong>Найпріоритетніше та найшвидше приймаю заявки в Telegram</strong> — пишіть одразу у чат або заповніть коротку форму праворуч (текст звернення скопіюється автоматично для відправки).</p>
+
+          <div class="direct-contacts" id="direct-contacts">
+            <!-- Динамічно заповнюється з site-data.json -->
+          </div>
+        </div>
+
+        <form id="order-form" class="order-form spotlight-card">
+          <div class="form-group">
+            <label for="client-niche">Сфера вашої діяльності *</label>
+            <select id="client-niche" required>
+              <option value="Майстер манікюру / педикюру">Майстер манікюру / педикюру</option>
+              <option value="Нарощення вій / Бровист">Нарощення вій / Бровист</option>
+              <option value="Косметолог / Масажист">Косметолог / Масажист</option>
+              <option value="Перукар / Барбер">Перукар / Барбер</option>
+              <option value="Інші послуги / локальний бренд">Інші послуги / локальний бренд</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="client-services-summary">Обрані послуги *</label>
+            <input type="text" id="client-services-summary" value="" required>
+          </div>
+
+          <div class="form-group">
+            <label for="client-contact">Ваш нік у Telegram або номер телефону *</label>
+            <input type="text" id="client-contact" placeholder="Наприклад: @нік або 068 000 00 00" required>
+          </div>
+
+          <div class="form-group">
+            <label for="client-notes">Побажання щодо проєкту (необов’язково)</label>
+            <textarea id="client-notes" rows="3" placeholder="Опишіть бажані кольори, стиль або вкажіть, якщо потрібна допомога з назвою бренду..."></textarea>
+          </div>
+
+          <div class="form-buttons">
+            <button type="submit" class="btn btn-primary btn-full" id="form-submit-btn">
+              Скопіювати заявку та відкрити Telegram
+            </button>
+            <a href="https://t.me/r_handziuk" target="_blank" rel="noopener" class="btn btn-outline btn-full" id="form-direct-btn">
+              Написати напряму в Telegram (@r_handziuk)
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПІДВАЛ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#top" class="logo" id="footer-logo">
+        <span class="logo-dot"></span><span id="footer-logo-main">Kodr</span><span id="footer-logo-accent">.studio</span>
+      </a>
+      <p id="footer-info">© 2026 Kodr.studio • Telegram: <a href="https://t.me/r_handziuk" target="_blank" rel="noopener" style="text-decoration:underline;">@r_handziuk</a> • Тел: <a href="tel:+380684763732" style="text-decoration:underline;">068 476 37 32</a></p>
+      <a href="#top" class="back-top" id="footer-back-top">Наверх ↑</a>
+    </div>
+  </footer>
+
+  <!-- СПЛИВАЮЧЕ ПОВІДОМЛЕННЯ -->
+  <div id="toast" class="toast">Заявку скопійовано! Вставте її в чат Telegram (@r_handziuk).</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
