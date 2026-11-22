@@ -153,6 +153,24 @@
     ],
     "projects": [
       {
+        "id": "proj-1795364618635",
+        "visible": true,
+        "category": "web",
+        "gradientStart": "#1C1310",
+        "gradientEnd": "#7C2D12",
+        "imageUrl": "",
+        "mockupTag": "",
+        "mockupTitle": "Market DUO",
+        "mockupSubtitle": "ПРОДУКТОВИЙ МАГАЗИН",
+        "metaLeft": "Сайт + Адмін-кабінет",
+        "metaRight": "Термін: 2-4 дні",
+        "title": "MARKET DUO - ОНЛАЙН КАТАЛОГ ПРОДУКТОВОГО МАГАЗИНУ ",
+        "description": "",
+        "btnText": "Відкрити живий сайт ↗",
+        "btnUrl": "https://handzyukrostuslav-cell.github.io/market-duo/",
+        "newTab": true
+      },
+      {
         "id": "proj-1",
         "visible": true,
         "category": "web",
