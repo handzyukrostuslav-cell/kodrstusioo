@@ -381,14 +381,6 @@
     "telegramHandle": "@r_handziuk",
     "cards": [
       {
-        "icon": "✈",
-        "title": "Написати в Telegram (найпріоритетніше)",
-        "subtitle": "@r_handziuk • t.me/r_handziuk",
-        "url": "https://t.me/r_handziuk",
-        "highlight": true,
-        "newTab": true
-      },
-      {
         "icon": "💬",
         "title": "Написати у Viber",
         "subtitle": "068 476 37 32",
@@ -403,38 +395,6 @@
         "url": "tel:+380684763732",
         "highlight": false,
         "newTab": false
-      },
-      {
-        "icon": "📸",
-        "title": "Написати в Instagram",
-        "subtitle": "@ваш_нік",
-        "url": "https://instagram.com/",
-        "highlight": false,
-        "newTab": true
-      },
-      {
-        "icon": "📸",
-        "title": "Написати в Instagram",
-        "subtitle": "@ваш_нік",
-        "url": "https://instagram.com/",
-        "highlight": false,
-        "newTab": true
-      },
-      {
-        "icon": "📸",
-        "title": "Написати в Instagram",
-        "subtitle": "@ваш_нік",
-        "url": "https://instagram.com/",
-        "highlight": false,
-        "newTab": true
-      },
-      {
-        "icon": "📸",
-        "title": "Написати в Instagram",
-        "subtitle": "@ваш_нік",
-        "url": "https://instagram.com/",
-        "highlight": false,
-        "newTab": true
       }
     ],
     "niches": [
