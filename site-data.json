@@ -9,7 +9,7 @@
   },
   "appearance": {
     "defaultTheme": "light",
-    "allowVisitorThemeSwitch": true,
+    "allowVisitorThemeSwitch": false,
     "customColorsEnabled": false,
     "customColors": {
       "bgMain": "#0D0D10",
@@ -22,8 +22,8 @@
     }
   },
   "header": {
-    "logoMain": "Kodr",
-    "logoAccent": ".studio",
+    "logoMain": "WEBSTUDIO",
+    "logoAccent": "| UKRAINE",
     "ctaText": "Обговорити проєкт",
     "ctaLink": "#order",
     "nav": [
